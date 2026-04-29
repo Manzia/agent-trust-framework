@@ -52,17 +52,8 @@ What broke, in trust-engineering language:
 - **Tokens with effective root.** Railway CLI tokens were not scoped by operation, environment, or resource — the same credential could read a log line or wipe production.
 - **No published recovery SLA.** "We're investigating" was the response posture 30 hours into a customer's production-data loss event.
 
-### 1.2 Case study: "DO NOT RUN ANYTHING" violated (Cursor Plan Mode, December 2025)
 
-A user typed an explicit halt instruction. The agent acknowledged it, then ran additional commands, deleting tracked files and terminating processes. A Cursor team member publicly acknowledged "a critical bug in Plan Mode constraint enforcement." **A user watched their dissertation, OS, applications, and personal data be deleted while asking the agent to find duplicate articles.**
-
-What broke:
-
-- **The instruction-following layer is statistical**, not enforcement. There is no architectural reason for the model to honor "do not run" — it is a soft preference inside the prompt, and a single decoded token can defy it.
-- **No staging or escrow.** Commands executed against the live system, not against a preview the user had to confirm.
-- **No reversibility.** Destructive ops happened in-place.
-
-### 1.3 The wider failure-mode taxonomy
+### 1.2 The wider failure-mode taxonomy
 
 The community-curated repository [`hb20007/awesome-gen-ai-fails`](https://github.com/hb20007/awesome-gen-ai-fails) catalogs hundreds of incidents from 2023–2026. We group them into seventeen recurring failure modes, every one of which a trust framework must address:
 
